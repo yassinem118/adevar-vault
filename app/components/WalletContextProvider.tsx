@@ -11,7 +11,7 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 export const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const endpoint = useMemo(() => clusterApiUrl('devnet'), []);
 
-  // حصر المحافظ المسموح بها صراحة فـ Solana فقط
+  // Explicitly allowlist Solana-supported wallets only 
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
@@ -20,7 +20,7 @@ export const WalletContextProvider: FC<{ children: ReactNode }> = ({ children })
     []
   );
 
-  // معالجة صامتة للأخطاء لتفادي WalletNotReadyError فـ Console
+  // Silently handle errors to suppress WalletNotReadyError in console
   const onError = useCallback((error: WalletError) => {
     if (error.name === 'WalletNotReadyError') {
       console.log('Solana Wallet extension not ready or not installed.');
