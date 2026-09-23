@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
-// منع SSR لزر المحفظة لتفادي خطأ Hydration Mismatch
+// Prevent SSR for the wallet button to avoid Hydration Mismatch error
 const WalletMultiButtonDynamic = dynamic(
   async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
   { ssr: false }
